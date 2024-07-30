@@ -1,6 +1,12 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
 import { Note } from "../model";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+
+interface Category {
+  value: string;
+  label: string;
+}
+
 interface AllNoteContextType {
   allNotes: Note[];
   noteAdd: () => void;
@@ -10,6 +16,7 @@ interface AllNoteContextType {
   archiveNotes: Note[];
   moveToArchive: (index: number) => void;
   moveFromArchive: (index: number) => void;
+  categories: Category[];
 }
 const AllNoteContext = createContext<AllNoteContextType | undefined>(undefined);
 
@@ -54,7 +61,7 @@ export const NoteProvider: React.FC<{ children: ReactNode }> = ({
 
   const noteAdd = () => {
     const emptyNote: Note = {
-      icon: faCartShopping, // Example icon, you can replace this
+      icon: faCartShopping,
       name: "",
       created: new Date(),
       category: "",
@@ -97,6 +104,12 @@ export const NoteProvider: React.FC<{ children: ReactNode }> = ({
     });
   };
 
+  const categories: Category[] = [
+    { value: "Task", label: "Task" },
+    { value: "Random Thought", label: "Random Thought" },
+    { value: "Idea", label: "Idea" },
+  ];
+
   return (
     <AllNoteContext.Provider
       value={{
@@ -108,6 +121,7 @@ export const NoteProvider: React.FC<{ children: ReactNode }> = ({
         archiveNotes,
         moveToArchive,
         moveFromArchive,
+        categories,
       }}
     >
       {children}
