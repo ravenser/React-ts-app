@@ -1,15 +1,25 @@
-import { useState } from 'react'
+import { createContext, useEffect, useState } from 'react'
 
 import './App.css'
+import { faArchive, faCartShopping, faTrash } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { Note } from './model.tsx'
+import NoteComponent from './componetns/NoteComponent.tsx'
+import { NoteProvider, useNoteContext } from './componetns/AllNotesContext.tsx'
+import NotesList from './componetns/NotesList.tsx'
+interface NoteContextType {
+  notes: Note[];
+  setNotes: React.Dispatch<React.SetStateAction<Note[]>>;
+}
 
 function App() {
+  const { handleNoteAdd } = useNoteContext();
   
-
   return (
     <>
       <div className='main'>
       <table className='table'>
-        <thead className='table_header'>
+        <thead className='header_table'>
           <tr>
             <th></th>
             <th>Name</th>
@@ -18,21 +28,17 @@ function App() {
             <th>Content</th>
             <th>Dates</th>
             <th className='icon-cell'> </th>
-            <th className='icon-cell'> <FontAwesomeIcon icon={faArchive} className="icon-header" /></th>
-            <th className='icon-cell'> <FontAwesomeIcon icon={faTrash} className="icon-header" /></th>
+            <th className='icon-cell'> <FontAwesomeIcon icon={faArchive} className="header__icon" /></th>
+            <th className='icon-cell'> <FontAwesomeIcon icon={faTrash} className="header__icon" /></th>
           </tr>
         </thead>
         <tbody>  
-          {notes.map((note, index)=> (
-            <Note key = {index} note = {note} updateNote = {handleNoteChange} 
-            deleteNote = {handleNoteDelete} id = {index}/>
-          ))}
+          <NotesList></NotesList>
         </tbody>
       </table>
       <div className='div-between'>
         <button className='button-between' onClick={handleNoteAdd}>
         Create Note</button>
-        <Archive></Archive>
       </div>
       <table className='table'>
         <thead className='table-header'>
@@ -44,13 +50,11 @@ function App() {
             </tr>
         </thead>
         <tbody>
-          <Category></Category>
-          <Category></Category>
-          <Category></Category>
+
         </tbody>
       </table>
     </div>
-  )
+  
     </>
   )
 }
