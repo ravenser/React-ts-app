@@ -1,7 +1,6 @@
-import React from 'react';
-import { useNoteContext } from './AllNotesContext.tsx'; // Adjust the import path
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import NoteComponent from './NoteComponent.tsx';
+import React from "react";
+import { useNoteContext } from "./AllNotesContext.tsx"; // Adjust the import path
+import NoteComponent from "./NoteComponent.tsx";
 
 const NoteList: React.FC = () => {
   const { allNotes } = useNoteContext();
@@ -9,7 +8,7 @@ const NoteList: React.FC = () => {
   return (
     <>
       {allNotes.map((_, index) => (
-          <NoteComponent key={index} index ={index}></NoteComponent>
+        <NoteComponent key={index} index={index}></NoteComponent>
       ))}
     </>
   );
