@@ -29,8 +29,14 @@ export const NoteProvider: React.FC<{ children: ReactNode }> = ({
       name: "Shopping list",
       created: new Date(),
       category: "Task",
-      content: "Tomatoes, bread",
-      dates: "",
+      content: "Tomatoes, bread, 22/04/2004, 03/12/2011",
+    },
+    {
+      icon: faCartShopping,
+      name: "Shopping list",
+      created: new Date(),
+      category: "Task",
+      content: "Tomatoes, bread, 04:22:2009",
     },
     {
       icon: faCartShopping,
@@ -38,7 +44,6 @@ export const NoteProvider: React.FC<{ children: ReactNode }> = ({
       created: new Date(),
       category: "Task",
       content: "Tomatoes, bread",
-      dates: "",
     },
     {
       icon: faCartShopping,
@@ -46,15 +51,6 @@ export const NoteProvider: React.FC<{ children: ReactNode }> = ({
       created: new Date(),
       category: "Task",
       content: "Tomatoes, bread",
-      dates: "",
-    },
-    {
-      icon: faCartShopping,
-      name: "Shopping list",
-      created: new Date(),
-      category: "Task",
-      content: "Tomatoes, bread",
-      dates: "",
     },
   ]);
   const [archiveNotes, setArciveNotes] = useState<Note[]>([]);
@@ -66,7 +62,6 @@ export const NoteProvider: React.FC<{ children: ReactNode }> = ({
       created: new Date(),
       category: "",
       content: "",
-      dates: "",
     };
     setNotes((prevNotes) => [...prevNotes, emptyNote]);
   };
@@ -88,14 +83,23 @@ export const NoteProvider: React.FC<{ children: ReactNode }> = ({
       ),
     );
   };
-  const moveToArchive = (index: number): void => {
+  // const moveToArchive = (index: number): void => {
+  //   setNotes((prevNotes) => {
+  //     console.log(index);
+  //     const [noteToArchive] = prevNotes.splice(index, 1);
+  //     setArciveNotes((prevArchived) => [...prevArchived, noteToArchive]);
+  //     return [...prevNotes];
+  //   });
+  // };
+
+  function moveToArchive(index: number): void {
     setNotes((prevNotes) => {
-      console.log(index);
-      const [noteToArchive] = prevNotes.splice(index, 1);
+      const noteToArchive = prevNotes[index];
       setArciveNotes((prevArchived) => [...prevArchived, noteToArchive]);
-      return [...prevNotes];
+      return prevNotes.filter((_, i) => i !== index);
     });
-  };
+  }
+
   const moveFromArchive = (index: number): void => {
     setArciveNotes((prevArchived) => {
       const [noteToArchive] = prevArchived.splice(index, 1);

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, {useState } from "react";
 import { useNoteContext } from "./AllNotesContext";
 import FormatDate from "./FormatDate";
 import {
@@ -7,9 +7,12 @@ import {
   faPencilAlt,
   faTrash,
   IconDefinition,
+  faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { Note } from "../model";
 import IconSelect from "./SelectIcon";
+import DateExtractor from "./DateExtractor";
+
 
 interface NoteComponentProps {
   index: number;
@@ -18,7 +21,7 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
   const { allNotes, editNotes, deleteNote, moveToArchive, categories } =
     useNoteContext();
   const [isEditing, setisEditing] = useState<boolean>(false);
-  const [selectedIcon, setSelectedicon] = useState<IconDefinition>(
+  const [noteIcon, setnoteIcon] = useState<IconDefinition>(
     allNotes[index].icon,
   );
   const [noteName, setNoteName] = useState<string>(allNotes[index].name);
@@ -31,8 +34,21 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
 
   const EditNote = () => {
     setisEditing(!isEditing);
-    const newNote: Note = allNotes[index];
+    setnoteIcon(allNotes[index].icon);
+    setNoteName(allNotes[index].name);
+    setSelectedCategory(allNotes[index].category);
+    setNoteContent(allNotes[index].content);
+  };
+  const FinishEditNote = () => {
+    const newNote: Note = {
+      icon: noteIcon,
+      name: noteName,
+      category: selectedCategory,
+      content: noteContent,
+      created: allNotes[index].created,
+    };
     editNotes(index, newNote);
+    setisEditing(!isEditing);
   };
   const editName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNoteName(e.target.value);
@@ -40,21 +56,24 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
   const editCategory = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(event.target.value);
   };
-  const editContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const editContentAndDates = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNoteContent(e.target.value);
   };
   return (
     <tr className="table-row">
       <td>
         {!isEditing && (
-          <FontAwesomeIcon icon={selectedIcon} className="category-icon" />
+          <FontAwesomeIcon
+            icon={allNotes[index].icon}
+            className="category-icon"
+          />
         )}
         {isEditing && (
-          <IconSelect selectedIcon={selectedIcon} onChange={setSelectedicon} />
+          <IconSelect selectedIcon={noteIcon} onChange={setnoteIcon} />
         )}
       </td>
       <td>
-        {!isEditing && <h2 className="name">{noteName}</h2>}
+        {!isEditing && <h2 className="name">{allNotes[index].name}</h2>}
         {isEditing && (
           <input type="text" value={noteName} onChange={editName}></input>
         )}
@@ -63,7 +82,7 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
         <FormatDate date={allNotes[index].created} />
       </td>
       <td>
-        {!isEditing && <p>{selectedCategory}</p>}
+        {!isEditing && <p>{allNotes[index].category}</p>}
         {isEditing && (
           <select value={selectedCategory} onChange={editCategory}>
             {categories.map((category) => (
@@ -75,14 +94,22 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
         )}
       </td>
       <td>
-        {!isEditing && <p>{noteContent}</p>}
-        {isEditing && <textarea value={noteContent} onChange={editContent} />}
+        {!isEditing && <p>{allNotes[index].content}</p>}
+        {isEditing && (
+          <textarea value={noteContent} onChange={editContentAndDates} />
+        )}
       </td>
-      <td>{allNotes[index].dates}</td>
+      <td>{DateExtractor(allNotes[index].content).join(" ")}</td>
       <td className="icon-cell">
-        <button className="button-row" onClick={EditNote}>
-          <FontAwesomeIcon icon={faPencilAlt} className="icon-row" />
-        </button>
+        {!isEditing && (<button className="button-row" onClick={EditNote}>
+            {<FontAwesomeIcon icon={faPencilAlt} className="icon-row" />}
+          </button>
+        )}
+        {isEditing && (
+          <button className="button-row" onClick={FinishEditNote}>
+            {<FontAwesomeIcon icon={faCheck} className="icon-row" />}
+          </button>
+        )}
       </td>
       <td className="icon-cell">
         <button className="button-row">

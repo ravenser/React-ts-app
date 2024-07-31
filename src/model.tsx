@@ -5,6 +5,5 @@ export type Note = {
   name: string;
   created: Date;
   category: string;
-  dates: string;
   content: string;
 };
