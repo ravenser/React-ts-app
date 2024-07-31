@@ -1,0 +1,133 @@
+.main{
+    padding: 10px 15px;
+}
+.table{
+    border-collapse: collapse;
+    width: 100%;
+}
+.header_table{
+    background-color: hsl(0, 0%, 60%);
+    
+}
+.table_row{
+    background-color: hsl(196, 22%, 90%);
+    border-top: 8px solid hsl(0, 0%, 100%);
+    padding-left: 10px;   
+}
+
+th{
+    text-align: left;
+    font-size: 1.2rem;
+    color: hsl(0, 0%, 95%);
+    padding: 4px;
+}
+td{
+    text-align: left;
+}
+
+th:nth-child(1), td:nth-child(1){
+    width: 8%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+th:last-child, td:last-child{
+    padding-right: 10px;
+}
+
+.category_icon{
+    background-color:  hsl(0, 0%, 45%);
+    color: hsl(0, 0%, 95%);
+    font-size: 1.5rem;
+    border-radius: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+.cell_icon{
+    text-align: center;
+    width: 20px;
+    height: 20px;
+}
+.header__icon{
+    color: white;
+}
+.row_icon{
+    color: hsl(0, 0%, 40%);
+    font-size: 1.2rem;
+}
+
+.row_button{
+    border: none;
+    background-color:  hsl(196, 22%, 90%);
+    padding: 7px 5px;
+    border-radius: 10px;
+}
+
+
+.row_button:hover{
+    background-color:  hsl(196, 22%, 80%);
+}
+
+.create_button{
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0 5px;
+    background-color: hsl(0, 0%, 95%);
+}
+.create_button:hover{
+    background-color: hsl(0, 0%, 80%);
+}
+
+.archive_button{
+    border-radius: 5px;
+    padding: 5px;
+    margin: 0 5px;
+    background-color: hsl(0, 45%, 65%);
+}
+
+.archive_button:hover{
+    background-color: hsl(0, 45%, 50%);
+}
+
+.middle_div{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: end;
+}
+
+.name{
+    font-family: monospace;
+    font-size: 1rem;
+    font-weight: bold;
+    color: hsl(0, 0%, 10%);
+}
+td p{
+    font-family: monospace;
+    font-size: 1rem;
+    color: hsl(0, 0%, 40%);
+}
+
+td select, input, textarea{
+    font-family: monospace;
+    font-size: 1rem;
+    color: hsl(0, 0%, 40%);
+    background-color: hsl(196, 22%, 95%);
+    max-width: 100%;
+    width: 90%;
+    padding: none;
+    margin: 0px 5px;    
+}
+
+.archive{
+    border: 4px solid hsl(0, 45%, 75%);
+    border-style:outset;
+    background-color: hsl(0, 45%, 65%);
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+.archive_table_row{
+    background-color: hsl(196, 22%, 90%);
+    border-top: 8px solid hsl(0, 45%, 65%);
+    padding-left: 10px;  
+}

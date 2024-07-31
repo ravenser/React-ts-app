@@ -11,11 +11,11 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
   const { archiveNotes, deleteNotefromArchive, moveFromArchive } =
     useNoteContext();
   return (
-    <tr className="table-row">
+    <tr className="archive_table_row">
       <td>
         <FontAwesomeIcon
           icon={archiveNotes[index].icon}
-          className="category-icon"
+          className="category_icon"
         />
       </td>
       <td>
@@ -31,25 +31,25 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
         <p>{archiveNotes[index].content}</p>
       </td>
       <td>{DateExtractor(archiveNotes[index].content).join(" ")}</td>
-      <td className="icon-cell">
-        <button className="button-row">
+      <td className="cell_icon">
+        <button className="row_button">
           <FontAwesomeIcon
             icon={faArchive}
-            className="icon-row"
+            className="row_icon"
             onClick={() => {
               moveFromArchive(index);
             }}
           />
         </button>
       </td>
-      <td className="icon-cell">
+      <td className="cell_icon">
         <button
-          className="button-row"
+          className="row_button"
           onClick={() => {
             deleteNotefromArchive(index);
           }}
         >
-          <FontAwesomeIcon icon={faTrash} className="icon-row" />
+          <FontAwesomeIcon icon={faTrash} className="row_icon" />
         </button>
       </td>
     </tr>

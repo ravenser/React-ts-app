@@ -106,12 +106,20 @@ export const NoteProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const categories: Category[] = [
-    { value: "Task", label: <FontAwesomeIcon icon={faCartShopping} /> },
+    {
+      value: "Task",
+      label: (
+        <FontAwesomeIcon icon={faCartShopping} className="category_icon" />
+      ),
+    },
     {
       value: "Random Thought",
-      label: <FontAwesomeIcon icon={faQuoteLeft} />,
+      label: <FontAwesomeIcon icon={faQuoteLeft} className="category_icon" />,
     },
-    { value: "Idea", label: <FontAwesomeIcon icon={faLightbulb} /> },
+    {
+      value: "Idea",
+      label: <FontAwesomeIcon icon={faLightbulb} className="category_icon" />,
+    },
   ];
 
   return (

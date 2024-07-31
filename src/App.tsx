@@ -27,12 +27,12 @@ function App() {
                 <th>Category</th>
                 <th>Content</th>
                 <th>Dates</th>
-                <th className="icon-cell"> </th>
-                <th className="icon-cell">
+                <th className="cell_icon"> </th>
+                <th className="cell_icon">
                   {" "}
                   <FontAwesomeIcon icon={faArchive} className="header__icon" />
                 </th>
-                <th className="icon-cell">
+                <th className="cell_icon">
                   {" "}
                   <FontAwesomeIcon icon={faTrash} className="header__icon" />
                 </th>
@@ -43,17 +43,17 @@ function App() {
             </tbody>
           </table>
         </div>
-        <div className="middle-div">
-          <button className="create-button" onClick={noteAdd}>
+        <div className="middle_div">
+          <button className="create_button" onClick={noteAdd}>
             Create Note
           </button>
-          <button className="archive-button" onClick={toggleArchive}>
+          <button className="archive_button" onClick={toggleArchive}>
             Archive
           </button>
         </div>
         {isArchiveVisible && (
-          <div>
-            <table>
+          <div className="archive">
+            <table className="table">
               <tbody>
                 <ArchiveList />
               </tbody>
@@ -61,7 +61,7 @@ function App() {
           </div>
         )}
         <table className="table">
-          <thead className="table-header">
+          <thead className="header_table">
             <tr>
               <th></th>
               <th>Note Category</th>

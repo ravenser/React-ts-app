@@ -12,7 +12,7 @@ import {
 import { Note } from "../model";
 import IconSelect from "./SelectIcon";
 import DateExtractor from "./DateExtractor";
-
+import "./style.css";
 interface NoteComponentProps {
   index: number;
 }
@@ -59,12 +59,12 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
     setNoteContent(e.target.value);
   };
   return (
-    <tr className="table-row">
+    <tr className="table_row">
       <td>
         {!isEditing && (
           <FontAwesomeIcon
             icon={allNotes[index].icon}
-            className="category-icon"
+            className="category_icon"
           />
         )}
         {isEditing && (
@@ -90,7 +90,7 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
           >
             {categories.map((category) => (
               <option key={category.value} value={category.value}>
-                {category.label}
+                {category.value}
               </option>
             ))}
           </select>
@@ -103,37 +103,37 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
         )}
       </td>
       <td>{DateExtractor(allNotes[index].content).join(" ")}</td>
-      <td className="icon-cell">
+      <td className="cell_icon">
         {!isEditing && (
-          <button className="button-row" onClick={EditNote}>
-            {<FontAwesomeIcon icon={faPencilAlt} className="icon-row" />}
+          <button className="row_button" onClick={EditNote}>
+            {<FontAwesomeIcon icon={faPencilAlt} className="row_icon" />}
           </button>
         )}
         {isEditing && (
-          <button className="button-row" onClick={FinishEditNote}>
-            {<FontAwesomeIcon icon={faCheck} className="icon-row" />}
+          <button className="row_button" onClick={FinishEditNote}>
+            {<FontAwesomeIcon icon={faCheck} className="row_icon" />}
           </button>
         )}
       </td>
-      <td className="icon-cell">
-        <button className="button-row">
+      <td className="cell_icon">
+        <button className="row_button">
           <FontAwesomeIcon
             icon={faArchive}
-            className="icon-row"
+            className="row_icon"
             onClick={() => {
               moveToArchive(index);
             }}
           />
         </button>
       </td>
-      <td className="icon-cell">
+      <td className="cell_icon">
         <button
-          className="button-row"
+          className="row_button"
           onClick={() => {
             deleteNote(index);
           }}
         >
-          <FontAwesomeIcon icon={faTrash} className="icon-row" />
+          <FontAwesomeIcon icon={faTrash} className="row_icon" />
         </button>
       </td>
     </tr>
