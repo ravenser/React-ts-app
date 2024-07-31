@@ -5,6 +5,7 @@ import { useNoteContext } from "./componetns/AllNotesContext.tsx";
 import NotesList from "./componetns/NotesList.tsx";
 import { useState } from "react";
 import ArchiveList from "./componetns/ArcviveList.tsx";
+import CategoryList from "./componetns/CategoryList.tsx";
 
 function App() {
   const { noteAdd } = useNoteContext();
@@ -68,7 +69,9 @@ function App() {
               <th>Archived</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            <CategoryList />
+          </tbody>
         </table>
       </div>
     </>

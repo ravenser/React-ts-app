@@ -3,6 +3,7 @@ import React from "react";
 import { useNoteContext } from "./AllNotesContext";
 import FormatDate from "./FormatDate";
 import { faArchive, faTrash } from "@fortawesome/free-solid-svg-icons";
+import DateExtractor from "./DateExtractor";
 interface NoteComponentProps {
   index: number;
 }
@@ -29,7 +30,7 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
       <td>
         <p>{archiveNotes[index].content}</p>
       </td>
-      <td>{archiveNotes[index].dates}</td>
+      <td>{DateExtractor(archiveNotes[index].content).join(" ")}</td>
       <td className="icon-cell">
         <button className="button-row">
           <FontAwesomeIcon

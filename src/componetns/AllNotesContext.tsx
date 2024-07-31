@@ -1,10 +1,15 @@
 import React, { createContext, ReactNode, useContext, useState } from "react";
 import { Note } from "../model";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCartShopping,
+  faLightbulb,
+  faQuoteLeft,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Category {
   value: string;
-  label: string;
+  label: React.ReactNode;
 }
 
 interface AllNoteContextType {
@@ -83,14 +88,6 @@ export const NoteProvider: React.FC<{ children: ReactNode }> = ({
       ),
     );
   };
-  // const moveToArchive = (index: number): void => {
-  //   setNotes((prevNotes) => {
-  //     console.log(index);
-  //     const [noteToArchive] = prevNotes.splice(index, 1);
-  //     setArciveNotes((prevArchived) => [...prevArchived, noteToArchive]);
-  //     return [...prevNotes];
-  //   });
-  // };
 
   function moveToArchive(index: number): void {
     setNotes((prevNotes) => {
@@ -109,9 +106,12 @@ export const NoteProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const categories: Category[] = [
-    { value: "Task", label: "Task" },
-    { value: "Random Thought", label: "Random Thought" },
-    { value: "Idea", label: "Idea" },
+    { value: "Task", label: <FontAwesomeIcon icon={faCartShopping} /> },
+    {
+      value: "Random Thought",
+      label: <FontAwesomeIcon icon={faQuoteLeft} />,
+    },
+    { value: "Idea", label: <FontAwesomeIcon icon={faLightbulb} /> },
   ];
 
   return (

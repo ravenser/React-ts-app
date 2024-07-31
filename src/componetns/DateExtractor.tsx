@@ -14,7 +14,7 @@ const DateExtractor = (text: string): string[] => {
 
   let dates: string[] = [];
 
-  datePatterns.forEach((pattern) => {
+  datePatterns.map((pattern) => {
     const matches = text.match(pattern);
     if (matches) {
       dates = dates.concat(matches);

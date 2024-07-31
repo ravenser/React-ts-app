@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, {useState } from "react";
+import React, { useState } from "react";
 import { useNoteContext } from "./AllNotesContext";
 import FormatDate from "./FormatDate";
 import {
@@ -12,7 +12,6 @@ import {
 import { Note } from "../model";
 import IconSelect from "./SelectIcon";
 import DateExtractor from "./DateExtractor";
-
 
 interface NoteComponentProps {
   index: number;
@@ -84,7 +83,11 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
       <td>
         {!isEditing && <p>{allNotes[index].category}</p>}
         {isEditing && (
-          <select value={selectedCategory} onChange={editCategory}>
+          <select
+            defaultValue={categories[0].value}
+            value={selectedCategory}
+            onChange={editCategory}
+          >
             {categories.map((category) => (
               <option key={category.value} value={category.value}>
                 {category.label}
@@ -101,7 +104,8 @@ const NoteComponent: React.FC<NoteComponentProps> = ({ index }) => {
       </td>
       <td>{DateExtractor(allNotes[index].content).join(" ")}</td>
       <td className="icon-cell">
-        {!isEditing && (<button className="button-row" onClick={EditNote}>
+        {!isEditing && (
+          <button className="button-row" onClick={EditNote}>
             {<FontAwesomeIcon icon={faPencilAlt} className="icon-row" />}
           </button>
         )}
